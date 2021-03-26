@@ -12,10 +12,12 @@ public class VerifiedFunctionRemove implements ReactionRemoveListener {
 
     @Override
     public void onReactionRemove(ReactionRemoveEvent event) {
+        Bot.logger.info("Verification remove Event received");
         event.getReaction().ifPresent(reaction ->{
-            if(reaction.getEmoji().equalsEmoji(":white_check_mark:")){
+            if(reaction.getEmoji().equalsEmoji("✅")){
                 event.getUser().ifPresent(user -> {
                     Bot.Verified.ifPresent(user::removeRole);
+                    Bot.logger.info("User: "+user+" unverified");
                 });
             }
         });

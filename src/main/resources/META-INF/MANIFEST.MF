@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Main-Class: de.bfbot.Bot
+Class-Path: xsalsa20poly1305-0.10.1.jar javacord-api-3.1.2.jar bcprov-jd
+ k15on-1.59.jar vavr-match-0.10.1.jar jackson-databind-2.9.3.jar nv-webs
+ ocket-client-2.6.jar okio-1.13.0.jar logging-interceptor-3.9.1.jar okht
+ tp-3.9.1.jar jackson-core-2.9.3.jar log4j-api-2.11.0.jar jackson-annota
+ tions-2.9.0.jar javacord-core-3.1.2.jar vavr-0.10.1.jar log4j-core-2.11
+ .0.jar
+
