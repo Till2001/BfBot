@@ -7,6 +7,7 @@ import org.javacord.api.DiscordApi;
 import org.javacord.api.DiscordApiBuilder;
 import org.javacord.api.entity.channel.*;
 import org.javacord.api.entity.message.Message;
+import org.javacord.api.entity.permission.Permissions;
 import org.javacord.api.entity.permission.Role;
 import org.javacord.api.entity.server.Server;
 import org.javacord.api.entity.user.User;
@@ -21,7 +22,7 @@ public class Bot {
 
     public static final Logger logger = LogManager.getLogger(Bot.class);
     public static DiscordApi api;
-    public static Optional<Role> Verified, HotNewsRole, SocialMediaNewsRole, MatchdayNewsRole;
+    public static Optional<Role> Verified, HotNewsRole, SocialMediaNewsRole, MatchdayNewsRole, BFClanTagRole;
     public static Optional<Server> BfServer;
     public static Optional<ServerChannel> MemberChannel, OnlineChannel, InVoiceChannel, VerificationChannel, RoleChannel;
     public static Optional<ServerTextChannel> BotChannel;
@@ -34,6 +35,7 @@ public class Bot {
                 .setToken(token)
                 .login().join();
         Init();
+        logger.info(api.createBotInvite(Permissions.fromBitmask(8)));
         logger.info("Bot Started");
     }
 
@@ -51,6 +53,8 @@ public class Bot {
         HotNewsRole     = api.getRoleById(IDs.HotNewsRole);
         SocialMediaNewsRole = api.getRoleById(IDs.SocialMediaNewsRole);
         MatchdayNewsRole    = api.getRoleById(IDs.MatchDayNewsRole);
+
+        BFClanTagRole = api.getRoleById(IDs.BFClanTagRole);
 
         BotChannel.ifPresent(serverTextChannel -> {
             serverTextChannel.addMessageCreateListener(event -> {
@@ -74,8 +78,23 @@ public class Bot {
             });
         });
 
+        BFClanTagRole.ifPresent(role -> {
+            role.addUserRoleAddListener(new BFClanTagRoleAddFunction());
+            role.addUserRoleRemoveListener(new BFClanTagRoleRemoveFunction());
+        });
+
+        SetupBFClanTagNameChangeListener();
+
         new ChannelNameTimer().start();
 
+    }
+
+    private void SetupBFClanTagNameChangeListener() {
+        BFClanTagRole.ifPresent(role -> {
+            for (User user:role.getUsers()) {
+                user.addUserChangeNameListener(new BFClanTagUserRenameFunction());
+            }
+        });
     }
 
     public static int GetCurrentUserCount(){

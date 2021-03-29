@@ -12,6 +12,7 @@ public class IDs{
     public static Long VerificationChannel = 812347332459757590L;
     public static Long RoleMessage = 824704953478152242L;
     public static Long RoleChannel = 824698027645993051L;
+    public static Long BFClanTagRole = 825787510281076737L;
 
     public static Long HotNewsRole = 824703295502680155L;
     public static Long SocialMediaNewsRole = 824703298854584441L;
