@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration name="Budenfuture Discord Bot" status="INFO" strict="true">
+<Configuration name="Budenfuture Discord de.bfbot.Bot" status="INFO" strict="true">
     <Appenders>
         <Console name="Console Appender">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
@@ -7,7 +7,7 @@
                 <ThresholdFilter level="INFO"/>
             </Filters>
         </Console>
-        <File name="File Appender" fileName="log/Budenfuture-Discord-Bot.log" createOnDemand="true">
+        <File name="File Appender" fileName="log/Budenfuture-Discord-de.bfbot.Bot.log" createOnDemand="true">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </File>
     </Appenders>
